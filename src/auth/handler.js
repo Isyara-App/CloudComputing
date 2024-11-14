@@ -2,6 +2,7 @@ const { nanoid } = require('nanoid');
 const users = require('./users');
 const { generateToken } = require('./token');
 const bcrypt = require('bcrypt');
+const pool = require('../database');
 
 const registerUser = async (request, h) => {
     const { name, email, password } = request.payload;

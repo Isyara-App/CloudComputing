@@ -7,6 +7,8 @@ const pool = createPool({
     connectionLimit: 10,
 });
 
-pool.query(`SELECT * FROM mydb.user_login`, (err, res) => {
+pool.query(`SELECT * FROM isyara_db`, (err, res) => {
     return console.log(res);
 });
+
+module.exports = pool;
