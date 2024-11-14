@@ -1,14 +1,27 @@
-const { createPool } = require('mysql');
+const mysql = require('mysql2');
 
-const pool = createPool({
+const con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'halohehe',
-    connectionLimit: 10,
+    database: 'isyara_db'
 });
 
-pool.query(`SELECT * FROM isyara_db`, (err, res) => {
-    return console.log(res);
+con.connect(function (err) {
+    if (err) {
+        throw err;
+    }
+
+    console.log('Connected to database');
+
+    con.query('INSERT INTO isyara_db.users VALUES (?, ?, ?, ?)',
+        [2, 'andi', 'asdba@gmail.com', 'afas'], (err, res) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send('success');
+            }
+        });
 });
 
-module.exports = pool;
+module.exports = con;
