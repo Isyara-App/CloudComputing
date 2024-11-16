@@ -6,11 +6,11 @@ const routes = [
         path: '/register',
         handler: authHandler.registerUser,
     },
-    {
+    /*{
         method: 'POST',
         path: '/login',
         handler: authHandler.loginUser,
-    },
+    },*/
 ];
 
 module.exports = routes;

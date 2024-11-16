@@ -3,7 +3,7 @@ const mysql = require('mysql2/promise');
 const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: '',
+    password: 'halohehe',
     database: 'isyara_db',
 });
 
@@ -16,4 +16,4 @@ const pool = mysql.createPool({
     }
 })();
 
-module.exports = pool;
+module.exports = { pool };
