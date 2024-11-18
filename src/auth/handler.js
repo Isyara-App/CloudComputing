@@ -1,4 +1,4 @@
-//const { generateToken } = require('./token');
+const { generateToken } = require('./token');
 const bcrypt = require('bcrypt');
 const Boom = require('@hapi/boom');
 const { pool } = require('../database');
@@ -25,15 +25,15 @@ const registerUser = async (request, h) => {
             'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
             [name, email, hashedPassword]
         );
-    
+
         const [newData] = await pool.query(
             'SELECT * FROM users WHERE id = ?',
             [result.insertId]
         );
-    
+
         const response = h.response({
             status: 'success',
-            message: 'Uer registered successfully',
+            message: 'User registered successfully',
             data: newData[0]
         });
         response.code(201);
@@ -41,52 +41,45 @@ const registerUser = async (request, h) => {
     }
 };
 
-/* const loginUser = async (request, h) => {
+const loginUser = async (request, h) => {
     const { email, password } = request.payload;
 
     if (!email || !password) {
         const response = h.response({
             status: 'fail',
-            message: 'Email and password are required',
+            message: 'Please fill all the required fields',
         });
         response.code(400);
         return response;
     }
 
-    //const user = users.find(u => u.email === email);
-    //if (!user) {
-    //    const response = h.response({
-    //        status: 'fail',
-    //        message: 'Account does not exist',
-    //    });
-    //    response.code(401);
-    //    return response;
-    //}
+    const [existingEmail] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
+    if (!existingEmail.length) {
+        throw Boom.badRequest('Email not found');
+    }
 
-    //const isPasswordValid = await bcrypt.compare(password, user.password);
-    //if (!isPasswordValid) {
-    //    const response = h.response({
-    //        status: 'fail',
-    //        message: 'Password is incorrect',
-    //    });
-    //    response.code(401);
-    //    return response;
-    //}
+    const userData = existingEmail[0];
+    const hashedPassword = userData.password;
 
-    //const token = generateToken({ email: user.email, id: user.id });
+    const isPasswordValid = await bcrypt.compare(password, hashedPassword);
+    if (!isPasswordValid) {
+        throw Boom.badRequest('Password is incorrect');
+    }
 
-    //const response = h.response({
-    //    status: 'success',
-    //    message: 'Login successful',
-    //    data: {
-    //        email: user.email,
-    //        id: user.id,
-    //        token
-    //    }
-    //});
-    //response.code(200);
-    //return response;
-};
-*/
+    const token = generateToken({ email: userData.email, id: userData.id });
 
-module.exports = { registerUser };
+    const response = h.response({
+        status: 'success',
+        message: 'Login successfully',
+        data: {
+            name: userData.name,
+            email: userData.email,
+        },
+        token
+    });
+    response.code(201);
+    return response;
+
+}
+
+module.exports = { registerUser, loginUser };
