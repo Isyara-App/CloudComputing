@@ -1,4 +1,5 @@
 const { pool } = require('../database');
+const Boom = require('@hapi/boom');
 
 const getAllLetters = async (request, h) => {
     const { search } = request.query;
@@ -11,14 +12,8 @@ const getAllLetters = async (request, h) => {
     }
 
     const [result] = await pool.query(query, params);
-
     if (result.length === 0) {
-        const response = h.response({
-            status: 'fail',
-            message: 'No data found / No data found for the specified search'
-        });
-        response.code(404);
-        return response;
+        throw Boom.notFound('No data found / No data found for the specified search');
     }
 
     const response = h.response({
@@ -38,12 +33,7 @@ const getLetterById = async (request, h) => {
     );
 
     if (result.length === 0) {
-        const response = h.response({
-            status: 'fail',
-            message: 'Letter not found'
-        });
-        response.code(404);
-        return response;
+        throw Boom.notFound('Letter not found');
     }
 
     const response = h.response({
@@ -60,12 +50,7 @@ const createLetter = async (request, h) => {
     const { image_url, huruf } = payload;
 
     if (!image_url || !huruf) {
-        const response = h.response({
-            status: 'fail',
-            message: "Image url and letter can't be blank"
-        });
-        response.code(400);
-        return response;
+        throw Boom.badRequest(`Image url and letter can't be blank`);
     }
 
     const [existingLetter] = await pool.query(
@@ -74,12 +59,7 @@ const createLetter = async (request, h) => {
     );
 
     if (existingLetter.length > 0) {
-        const response = h.response({
-            status: 'fail',
-            message: 'A data with that letter already exists'
-        });
-        response.code(400);
-        return response;
+        throw Boom.badRequest('A data with that letter already exists');
     }
 
     const [result] = await pool.query(
@@ -107,12 +87,7 @@ const updateLetter = async (request, h) => {
     const { image_url, huruf } = payload;
 
     if (!image_url || !huruf) {
-        const response = h.response({
-            status: 'fail',
-            message: "Image URL and letter can't be blank"
-        });
-        response.code(400);
-        return response;
+        throw Boom.badRequest(`Image url and letter can't be blank`);
     }
 
     const [result] = await pool.query(
@@ -121,12 +96,7 @@ const updateLetter = async (request, h) => {
     );
 
     if (result.affectedRows === 0) {
-        const response = h.response({
-            status: 'fail',
-            message: 'Letter not found'
-        });
-        response.code(404);
-        return response;
+        throw Boom.notFound('Letter not found');
     }
 
     const [updatedData] = await pool.query(
@@ -151,12 +121,7 @@ const deleteLetter = async (request, h) => {
     );
 
     if (result.affectedRows === 0) {
-        const response = h.response({
-            status: 'fail',
-            message: 'Letter not found'
-        });
-        response.code(404);
-        return response;
+        throw Boom.notFound('Letter not found');
     }
 
     const response = h.response({

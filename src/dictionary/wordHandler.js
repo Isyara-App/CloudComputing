@@ -1,4 +1,5 @@
 const { pool } = require('../database');
+const Boom = require('@hapi/boom');
 
 const getAllWords = async (request, h) => {
     const { search } = request.query;
@@ -13,12 +14,7 @@ const getAllWords = async (request, h) => {
     const [result] = await pool.query(query, params);
 
     if (result.length === 0) {
-        const response = h.response({
-            status: 'fail',
-            message: 'No data found / No data found for the specified search'
-        });
-        response.code(404);
-        return response;
+        throw Boom.notFound('No data found / No data found for the specified search');
     }
 
     const response = h.response({
@@ -38,12 +34,7 @@ const getWordById = async (request, h) => {
     );
 
     if (result.length === 0) {
-        const response = h.response({
-            status: 'fail',
-            message: 'Word not found'
-        });
-        response.code(404);
-        return response;
+        throw Boom.notFound('Word not found');
     }
 
     const response = h.response({
@@ -60,12 +51,7 @@ const createWord = async (request, h) => {
     const { image_url, kata } = payload;
 
     if (!image_url || !kata) {
-        const response = h.response({
-            status: 'fail',
-            message: "Image url and word can't be blank"
-        });
-        response.code(400); 
-        return response;
+        throw Boom.badRequest(`Image url and word can't be blank`);
     }
 
     const [existingWord] = await pool.query(
@@ -74,12 +60,7 @@ const createWord = async (request, h) => {
     );
 
     if (existingWord.length > 0) {
-        const response = h.response({
-            status: 'fail',
-            message: 'A word with that value already exists'
-        });
-        response.code(400);
-        return response;
+        throw Boom.badRequest('A word with that value already exists');
     }
 
     const [result] = await pool.query(
@@ -107,12 +88,7 @@ const updateWord = async (request, h) => {
     const { image_url, kata } = payload;
 
     if (!image_url || !kata) {
-        const response = h.response({
-            status: 'fail',
-            message: "Image URL and word can't be blank"
-        });
-        response.code(400);
-        return response;
+        throw Boom.badRequest(`Image url and word can't be blank`);
     }
 
     const [result] = await pool.query(
@@ -121,12 +97,7 @@ const updateWord = async (request, h) => {
     );
 
     if (result.affectedRows === 0) {
-        const response = h.response({
-            status: 'fail',
-            message: 'Word not found'
-        });
-        response.code(404);
-        return response;
+        throw Boom.notFound('Word not found');
     }
 
     const [updatedData] = await pool.query(
@@ -151,12 +122,7 @@ const deleteWord = async (request, h) => {
     );
 
     if (result.affectedRows === 0) {
-        const response = h.response({
-            status: 'fail',
-            message: 'Word not found'
-        });
-        response.code(404);
-        return response;
+        throw Boom.notFound('Word not found');
     }
 
     const response = h.response({

@@ -1,5 +1,6 @@
 const { pool } = require('../database');
 const Joi = require('joi');
+const Boom = require('@hapi/boom');
 
 const newsSchema = Joi.object({
     title: Joi.string().min(5).required().messages({
@@ -21,12 +22,7 @@ const getAllNews = async (request, h) => {
     const [result] = await pool.query(query);
 
     if (result.length === 0) {
-        const response = h.response({
-            status: 'fail',
-            message: 'No news found'
-        });
-        response.code(404);
-        return response;
+        throw Boom.notFound('No news found');
     }
 
     const response = h.response({
@@ -46,12 +42,7 @@ const getNewsById = async (request, h) => {
     );
 
     if (result.length === 0) {
-        const response = h.response({
-            status: 'fail',
-            message: 'News not found'
-        });
-        response.code(404);
-        return response;
+        throw Boom.notFound('News not found');
     }
 
     const response = h.response({
@@ -68,12 +59,7 @@ const createNews = async (request, h) => {
     const { error } = newsSchema.validate(payload);
 
     if (error) {
-        const response = h.response({
-            status: 'fail',
-            message: error.details[0].message,
-        });
-        response.code(400);
-        return response;
+        throw Boom.badRequest(error.details[0].message);
     }
 
     const { title, image_url, description } = payload;
@@ -103,12 +89,7 @@ const updateNews = async (request, h) => {
     const { error } = newsSchema.validate(payload);
 
     if (error) {
-        const response = h.response({
-            status: 'fail',
-            message: error.details[0].message,
-        });
-        response.code(400);
-        return response;
+        throw Boom.badRequest(error.details[0].message);
     }
 
     const { title, image_url, description } = payload;
@@ -119,12 +100,7 @@ const updateNews = async (request, h) => {
     );
 
     if (result.affectedRows === 0) {
-        const response = h.response({
-            status: 'fail',
-            message: 'News not found'
-        });
-        response.code(404);
-        return response;
+        throw Boom.notFound('News not found');
     }
 
     const [updatedData] = await pool.query(
@@ -149,12 +125,7 @@ const deleteNews = async (request, h) => {
         [id]);
 
     if (news.length === 0) {
-        const response = h.response({
-            status: 'fail',
-            message: 'News not found',
-        });
-        response.code(404);
-        return response;
+        throw Boom.notFound('News not found');
     }
 
     await pool.query(

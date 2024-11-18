@@ -7,12 +7,7 @@ const registerUser = async (request, h) => {
     const { name, email, password } = request.payload;
 
     if (!name || !email || !password) {
-        const response = h.response({
-            status: 'fail',
-            message: 'All fields are required',
-        });
-        response.code(400);
-        return response;
+        throw Boom.badRequest('All fields are required');
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -45,12 +40,7 @@ const loginUser = async (request, h) => {
     const { email, password } = request.payload;
 
     if (!email || !password) {
-        const response = h.response({
-            status: 'fail',
-            message: 'Please fill all the required fields',
-        });
-        response.code(400);
-        return response;
+        throw Boom.badRequest('Please fill all the required fields');
     }
 
     const [existingEmail] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);

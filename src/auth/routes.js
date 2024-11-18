@@ -1,4 +1,4 @@
-const authHandler = require('./handler');
+const authHandler = require('./userHandler');
 
 const routes = [
     {
