@@ -1,7 +1,7 @@
 const letterHandler = require('./letterHandler');
 const wordHandler = require('./wordHandler');
 
-module.exports = [
+const routes = [
     //Letters
     {
         method: 'GET',
@@ -56,3 +56,5 @@ module.exports = [
         handler: wordHandler.deleteWord
     },
 ];
+
+module.exports = routes;

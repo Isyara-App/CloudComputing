@@ -1,4 +1,4 @@
-const pool = require('../database');
+const { pool } = require('../database');
 
 const getAllLetters = async (request, h) => {
     const { search } = request.query;
