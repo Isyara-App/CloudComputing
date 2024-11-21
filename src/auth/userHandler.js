@@ -26,10 +26,13 @@ const registerUser = async (request, h) => {
             [result.insertId]
         );
 
+        const token = generateToken({ email: newData.email, id: newData.id });
+
         const response = h.response({
             status: 'success',
             message: 'User registered successfully',
-            data: newData[0]
+            data: newData[0],
+            token
         });
         response.code(201);
         return response;
