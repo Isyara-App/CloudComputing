@@ -1,12 +1,26 @@
-/* const multer = require('multer');
-const upload = multer({ dest: 'profile_pic/' });
+/*const { pool } = require('../database');
+const Boom = require('@hapi/boom');
+const multer = require('multer');
 
-upload.single('image'), (request, h) => {
-    const respone = h.response({
-        message: 'Profile Picture changed successfully',
-    })
-    respone.code(200);
-    return respone;
-};
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
 
-module.exports = upload; */
+const upload = multer({ storage: storage });
+
+const uploadImage = (request, h) => {
+    upload.single('image')(request, request.payload, (err, file) => {
+        if (err) {
+            return h.respnse(err).code(400);
+        }
+        console.log(file);
+        return h.response('Image upload successfully!').code(200);
+    });
+}
+
+module.exports = uploadImage;*/
