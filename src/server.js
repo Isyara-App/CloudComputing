@@ -3,7 +3,7 @@ const auth = require('./auth/routes');
 const dictionary = require('./dictionary/routes');
 const information = require('./information/routes');
 const logout = require('./logout/routes');
-const profile = require('./profile/routes');
+//const profile = require('./profile/routes');
 
 const init = async () => {
     const server = Hapi.server({
@@ -15,7 +15,7 @@ const init = async () => {
     server.route(dictionary);
     server.route(information);
     server.route(logout);
-    server.route(profile);
+    //server.route(profile);
 
     await server.start();
     console.log(`Server berjalan pada ${server.info.uri}`);

@@ -1,11 +1,11 @@
-const uploadImage = require('./updateProfile');
+/* const upload = require('./updateProfile');
 
 const routes = [
     {
         method: 'POST',
         path: '/api/upload',
-        handler: uploadImage.upload,
+        handler: upload,
     }
 ];
 
-module.exports = routes;
+module.exports = routes; */

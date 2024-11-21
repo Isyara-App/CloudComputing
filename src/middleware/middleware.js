@@ -1,6 +1,6 @@
 const { pool } = require('../database');
 const Boom = require('@hapi/boom');
-const jwt = require('../auth/token');
+const jwt = require('jsonwebtoken');
 
 const validateToken = async (request, h) => {
     try {
@@ -34,11 +34,11 @@ const validateToken = async (request, h) => {
         if (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError') {
             throw Boom.unauthorized('Invalid or expired token');
         }
-
-        console.error('Token validation error:', error.message);
-        throw Boom.internal('Token validation failed', error);
+        
+        throw Boom.unauthorized(error.message);
+        
     }
 };
 
-module.exports = { validateToken };
+module.exports = validateToken;
 

@@ -1,5 +1,5 @@
 const  logoutHandler = require('./logoutHandler');
-const validateToken = require('./middleware');
+const validateToken = require('../middleware/middleware');
 
 const routes = [
     {
