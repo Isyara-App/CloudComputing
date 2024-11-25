@@ -1,5 +1,4 @@
-/*const validateToken = require('../middleware/middleware');
-const uploadImage = require('./updateProfile');
+const validateToken = require('../middleware/middleware');
 
 const routes = [
     {
@@ -8,8 +7,8 @@ const routes = [
         options: {
             pre: [{ method: validateToken }]
         },
-        handler: uploadImage,
+        handler: ,
     }
 ];
 
-module.exports = routes;*/
+module.exports = routes;

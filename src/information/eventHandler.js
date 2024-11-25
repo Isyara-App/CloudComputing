@@ -1,4 +1,4 @@
-const { pool } = require('../database');
+const { pool } = require('../app/database');
 const Joi = require('joi');
 const Boom = require('@hapi/boom');
 

@@ -1,4 +1,4 @@
-const { pool } = require('../database');
+const { pool } = require('../app/database');
 const Boom = require('@hapi/boom');
 
 const userLogout = async (request, h) => {

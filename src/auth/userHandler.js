@@ -1,7 +1,7 @@
 const { generateToken } = require('./token');
 const bcrypt = require('bcrypt');
 const Boom = require('@hapi/boom');
-const { pool } = require('../database');
+const { pool } = require('../app/database');
 
 const registerUser = async (request, h) => {
     const { name, email, password } = request.payload;
