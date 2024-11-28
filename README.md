@@ -5,7 +5,7 @@
 
 - URL
 
-  - Tips: `/quiz/levels`
+  - `/quiz/levels`
 
 - Method
 
@@ -48,7 +48,7 @@
 
 - URL
 
-  - Tips: `/quiz/levels/{levelId}`
+  - `/quiz/levels/{levelId}`
 
 - Method
 
@@ -79,7 +79,7 @@ You can only access the next level after completing the previous level. Example:
 
 - URL
 
-  - Tips: `/quiz/levels/{levelId}/questions/{questionId}`
+  - `/quiz/levels/{levelId}/questions/{questionId}`
 
 - Method
 
@@ -117,7 +117,7 @@ You can only access the next level after completing the previous level. Example:
 
 - URL
 
-  - Tips: `/quiz/levels/{levelId}/questions/{questionId}/answer`
+  - `/quiz/levels/{levelId}/questions/{questionId}/answer`
 
 - Method
 
