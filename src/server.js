@@ -2,6 +2,7 @@ const Hapi = require('@hapi/hapi');
 const auth = require('./auth/routes');
 const dictionary = require('./dictionary/routes');
 const information = require('./information/routes');
+const quiz = require('./quiz/routes')
 const logout = require('./logout/routes');
 //const profile = require('./profile/routes');
 
@@ -14,6 +15,7 @@ const init = async () => {
     server.route(auth);
     server.route(dictionary);
     server.route(information);
+    server.route(quiz);
     server.route(logout);
     //server.route(profile);
 
