@@ -4,7 +4,6 @@ const dictionary = require('./dictionary/routes');
 const information = require('./information/routes');
 const quiz = require('./quiz/routes')
 const logout = require('./logout/routes');
-//const profile = require('./profile/routes');
 
 const init = async () => {
     const server = Hapi.server({
@@ -17,7 +16,6 @@ const init = async () => {
     server.route(information);
     server.route(quiz);
     server.route(logout);
-    //server.route(profile);
 
     await server.start();
     console.log(`Server berjalan pada ${server.info.uri}`);
