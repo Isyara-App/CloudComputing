@@ -6,7 +6,7 @@ const generateToken = (userData) => {
     if (!secretKey) {
         throw new Error('secret key is not defined');
     }
-    return jwt.sign(userData, secretKey, { expiresIn: '1h' });
+    return jwt.sign(userData, secretKey, { expiresIn: '3d' });
 };
 
 module.exports = { generateToken };
