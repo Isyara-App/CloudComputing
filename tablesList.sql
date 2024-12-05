@@ -74,25 +74,39 @@ CREATE TABLE IF NOT EXISTS community (
 CREATE TABLE IF NOT EXISTS levels (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- Tabel Questions
 CREATE TABLE IF NOT EXISTS questions (
-    id INT AUTO_INCREMENT PRIMARY KEY,
     level_id INT NOT NULL,
+    id INT NOT NULL,
+    image_url VARCHAR(255) NOT NULL,
     question TEXT NOT NULL,
     correct_option VARCHAR(255) NOT NULL,
     options JSON NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id, level_id),
     FOREIGN KEY (level_id) REFERENCES levels (id) ON DELETE CASCADE
+);
+
+-- Tabel User Answers
+CREATE TABLE IF NOT EXISTS user_answers (
+    user_id INT NOT NULL,
+    level_id INT NOT NULL,
+    question_id INT NOT NULL,
+    is_correct BOOLEAN NOT NULL,
+    PRIMARY KEY (user_id, question_id, level_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (question_id, level_id) REFERENCES questions(id, level_id) ON DELETE CASCADE
 );
 
 -- Tabel User Progress
 CREATE TABLE IF NOT EXISTS user_progress (
-    id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     level_id INT NOT NULL,
     status ENUM('completed', 'in_progress') DEFAULT 'in_progress',

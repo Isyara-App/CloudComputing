@@ -1,4 +1,5 @@
-const quizHandler = require("./quizHandler");
+const levelHandler = require("./levelHandler");
+const questionHandler = require("./questionHandler")
 const validateToken = require('../middleware/middleware');
 
 const routes = [
@@ -9,7 +10,7 @@ const routes = [
         options: {
             pre: [{ method: validateToken }]
         },
-        handler: quizHandler.getAllLevels
+        handler: levelHandler.getAllLevels
     },
     {
         method: "GET",
@@ -17,7 +18,7 @@ const routes = [
         options: {
             pre: [{ method: validateToken }]
         },
-        handler: quizHandler.getLevelById
+        handler: levelHandler.getLevelById
     },
     {
         method: "POST",
@@ -25,7 +26,7 @@ const routes = [
         options: {
             pre: [{ method: validateToken }]
         },
-        handler: quizHandler.createLevel
+        handler: levelHandler.createLevel
     },
     {
         method: "PUT",
@@ -33,7 +34,7 @@ const routes = [
         options: {
             pre: [{ method: validateToken }]
         },
-        handler: quizHandler.updateLevel
+        handler: levelHandler.updateLevel
     },
     {
         method: "DELETE",
@@ -41,7 +42,7 @@ const routes = [
         options: {
             pre: [{ method: validateToken }]
         },
-        handler: quizHandler.deleteLevel
+        handler: levelHandler.deleteLevel
     },
 
     //Questions
@@ -51,7 +52,7 @@ const routes = [
         options: {
             pre: [{ method: validateToken }]
         },
-        handler: quizHandler.getAllQuestions,
+        handler: questionHandler.getAllQuestions,
     },
     {
         method: "GET",
@@ -59,7 +60,7 @@ const routes = [
         options: {
             pre: [{ method: validateToken }]
         },
-        handler: quizHandler.getQuestionById,
+        handler: questionHandler.getQuestionById,
     },
     {
         method: "POST",
@@ -67,7 +68,7 @@ const routes = [
         options: {
             pre: [{ method: validateToken }]
         },
-        handler: quizHandler.createQuestion,
+        handler: questionHandler.createQuestion,
     },
     {
         method: "PUT",
@@ -75,7 +76,7 @@ const routes = [
         options: {
             pre: [{ method: validateToken }]
         },
-        handler: quizHandler.updateLevel,
+        handler: questionHandler.updateQuestion,
     },
     {
         method: "DELETE",
@@ -83,7 +84,7 @@ const routes = [
         options: {
             pre: [{ method: validateToken }]
         },
-        handler: quizHandler.deleteLevel,
+        handler: questionHandler.deleteQuestion,
     },
 
     //Check Answer
@@ -93,7 +94,17 @@ const routes = [
         options: {
             pre: [{ method: validateToken }]
         },
-        handler: quizHandler.checkAnswer,
+        handler: questionHandler.checkAnswer,
+    },
+
+    //Check Completion
+    {
+        method: "GET",
+        path: "/quiz/levels/{levelId}/completion",
+        options: {
+            pre: [{ method: validateToken }]
+        },
+        handler: questionHandler.checkCompletion,
     },
 ];
 
