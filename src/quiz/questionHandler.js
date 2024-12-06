@@ -183,7 +183,6 @@ const checkAnswer = async (request, h) => {
         throw Boom.unauthorized('User not authenticated');
     }
 
-    // Fetch the level_id and correct_option for the given questionId
     const [questionResult] = await pool.query(
         "SELECT level_id, correct_option FROM questions WHERE id = ?",
         [questionId]
@@ -242,19 +241,25 @@ const checkCompletion = async (request, h) => {
         [userId, levelId, status, status]
     );
 
-    const levelName = await pool.query(
+    const [levelResult] = await pool.query(
         "SELECT name FROM levels WHERE id = ?",
         [levelId]
     );
+    
+    if (levelResult.length === 0) {
+        throw Boom.notFound('Level not found');
+    }
+    
+    const levelName = levelResult[0].name;
 
     let message, imageUrl;
 
     if (allCorrect) {
         message = `Congrats! Kamu telah menyelesaikan quiz ${levelName}. Silahkan lanjutkan perjalanan mu!`;
-        imageUrl = 'https://';
+        imageUrl = 'https://storage.googleapis.com/isyara-storage/Quiz/Smile.png';
     } else {
         message = 'Failed. Oh tidak, kamu gagal menjawab semua pertanyaan dengan benar.';
-        imageUrl = 'https://';
+        imageUrl = 'https://storage.googleapis.com/isyara-storage/Quiz/Sad.png';
     }
 
     const response = h.response({
