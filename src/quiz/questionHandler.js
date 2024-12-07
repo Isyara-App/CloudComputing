@@ -18,7 +18,7 @@ const getAllQuestions = async (request, h) => {
     const questions = result.map((question, index) => ({
         ...question,
         name: `Question ${index + 1} of ${totalQuestions}`,
-        options: JSON.parse(question.options)
+        options: Array.isArray(question.options) ? question.options : JSON.parse(question.options)
     }));
 
     const response = h.response({
@@ -53,7 +53,7 @@ const getQuestionById = async (request, h) => {
     const questionIndex = allQuestions.findIndex(q => q.id === parseInt(questionId)) + 1;
 
     question.name = `Question ${questionIndex} of ${totalQuestions}`;
-    question.options = JSON.parse(question.options);
+    question.options = Array.isArray(question.options) ? question.options : JSON.parse(question.options); 
 
     const response = h.response({
         status: 'success',
@@ -90,7 +90,7 @@ const createQuestion = async (request, h) => {
         [nextId, levelId]
     );
 
-    const totalQuestions = await pool.query(
+    const [totalQuestions] = await pool.query(
         'SELECT COUNT(id) AS totalQuestions FROM questions WHERE level_id = ?',
         [levelId]
     );
@@ -98,7 +98,7 @@ const createQuestion = async (request, h) => {
     const questionData = {
         ...newData[0],
         name: `Question ${nextId} of ${totalQuestions[0].totalQuestions}`,
-        options: JSON.parse(newData[0].options)
+        options: Array.isArray(newData[0].options) ? newData[0].options : JSON.parse(newData[0].options) 
     };
 
     const response = h.response({
@@ -132,7 +132,7 @@ const updateQuestion = async (request, h) => {
         [questionId, levelId]
     );
 
-    const totalQuestions = await pool.query(
+    const [totalQuestions] = await pool.query(
         'SELECT COUNT(id) AS totalQuestions FROM questions WHERE level_id = ?',
         [levelId]
     );
@@ -140,7 +140,7 @@ const updateQuestion = async (request, h) => {
     const questionData = {
         ...updatedData[0],
         name: `Question ${questionId} of ${totalQuestions[0].totalQuestions}`,
-        options: JSON.parse(updatedData[0].options)
+        options: Array.isArray(updatedData[0].options) ? updatedData[0].options : JSON.parse(updatedData[0].options)
     };
 
     const response = h.response({
