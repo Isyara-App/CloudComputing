@@ -55,15 +55,15 @@ const getLevelById = async (request, h) => {
 
 const createLevel = async (request, h) => {
     const payload = request.payload || {};
-    const { name, title, description } = payload;
+    const { name, title, description, image_url } = payload;
 
-    if (!name || !title || !description) {
-        throw Boom.badRequest(`Name, title, and description can't be blank`);
+    if (!name || !title || !description || !image_url) {
+        throw Boom.badRequest(`Name, title, description, and image_url can't be blank`);
     }
 
     const [result] = await pool.query(
-        "INSERT INTO levels (name, title, description) VALUES (?, ?, ?)",
-        [name, title, description]
+        "INSERT INTO levels (name, title, description, image_url) VALUES (?, ?, ?, ?)",
+        [name, title, description, image_url]
     );
 
     const [newData] = await pool.query(
@@ -82,15 +82,15 @@ const createLevel = async (request, h) => {
 
 const updateLevel = async (request, h) => {
     const { levelId } = request.params;
-    const { name, title, description } = request.payload;
+    const { name, title, description, image_url } = request.payload;
 
-    if (!name || !title || !description) {
-        throw Boom.badRequest(`Name, title, and description can't be blank`);
+    if (!name || !title || !description || !image_url) {
+        throw Boom.badRequest(`Name, title, description, and image_url can't be blank`);
     }
 
     const [result] = await pool.query(
-        'UPDATE levels SET name = ?, title = ?, description = ? WHERE id = ?',
-        [name, title, description, levelId]
+        'UPDATE levels SET name = ?, title = ?, description = ?, image_url = ? WHERE id = ?',
+        [name, title, description, image_url, levelId]
     );
 
     if (result.affectedRows === 0) {
