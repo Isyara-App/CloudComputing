@@ -1,4 +1,4 @@
-const tf = require('@tensorflow/tfjs-node');
+/* const tf = require('@tensorflow/tfjs-node');
 const InputError = require('../execptions/InputError');
 
 async function predictClassification(model, image) {
@@ -7,7 +7,7 @@ async function predictClassification(model, image) {
             .decodePng(image, 3) // 3 means RGB (ignoring the alpha channel)
             .resizeNearestNeighbor([224, 224])
             .expandDims() // Add batch dimension [1, 224, 224, 3]
-            .toFloat();
+            .toFloat()
 
         // Check if the image has 4 channels (RGBA), and remove the alpha channel if present
         if (tensor.shape[2] === 4) {
@@ -31,4 +31,4 @@ async function predictClassification(model, image) {
     }
 }
 
-module.exports = predictClassification;
+module.exports = predictClassification; */

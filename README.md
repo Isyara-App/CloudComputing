@@ -36,10 +36,10 @@
         "name": "ayumi",
         "email": "ayumi@gmail.com",
         "password": "$2b$10$WAJQ9nZtWfpNsRp4ZtioQeiy3z1fq0L1zY9Uq9Dgiv11ewkbFITJW",
+        "image_url": "",
         "created_at": "2024-11-30T07:07:32.000Z",
         "updated_at": "2024-11-30T07:07:32.000Z"
     },
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzI5NTA0NTIsImV4cCI6MTczMjk1NDA1Mn0.xBimJIvh0ADgASqmqGtbHKALhW8L-smEUB2GeUFdnyk"
 }
 ```
 

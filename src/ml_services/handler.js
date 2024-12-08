@@ -1,4 +1,4 @@
-const predictClassification = require('../ml_services/inferenceService');
+/*const predictClassification = require('../ml_services/inferenceService');
 const crypto = require('crypto');
 
 async function postPredictHandler(request, h) {
@@ -25,4 +25,4 @@ async function postPredictHandler(request, h) {
     return response;
 }
 
-module.exports = postPredictHandler;
+module.exports = postPredictHandler; */

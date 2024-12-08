@@ -1,11 +1,13 @@
 const Hapi = require('@hapi/hapi');
+const Inert = require('@hapi/inert');
 const auth = require('./auth/routes');
 const dictionary = require('./dictionary/routes');
 const information = require('./information/routes');
 const quiz = require('./quiz/routes')
 const logout = require('./logout/routes');
-const translate = require('./ml_services/routes');
-const loadModel = require('./ml_services/loadModel');
+//const translate = require('./ml_services/routes');
+const profile = require('./profile/routes');
+//const loadModel = require('./ml_services/loadModel');
 const InputError = require('./execptions/InputError');
 
 const init = async () => {
@@ -14,15 +16,16 @@ const init = async () => {
         host: 'localhost',
     });
 
-    const model = await loadModel();
-    server.app.model = model;
+    //const model = await loadModel();
+    //server.app.model = model;
 
     server.route(auth);
     server.route(dictionary);
     server.route(information);
     server.route(quiz);
+    server.route(profile);
     server.route(logout);
-    server.route(translate);
+    //server.route(translate);
 
     server.ext('onPreResponse', function(request, h) {
         const response = request.response;
@@ -41,7 +44,7 @@ const init = async () => {
                 status: 'fail',
                 message: response.message
             })
-            newResponse.code(response.statusCode);
+            newResponse.code(response.output.statusCode);
             return newResponse;
         }
 
@@ -49,6 +52,7 @@ const init = async () => {
     })
 
     await server.start();
+    await server.register(Inert);
     console.log(`Server berjalan pada ${server.info.uri}`);
 };
 
