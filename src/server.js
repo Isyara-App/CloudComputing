@@ -3,10 +3,9 @@ const Inert = require('@hapi/inert');
 const auth = require('./auth/routes');
 const dictionary = require('./dictionary/routes');
 const information = require('./information/routes');
-const quiz = require('./quiz/routes')
-const logout = require('./logout/routes');
+const quiz = require('./quiz/routes');
+const settings = require('./settings/routes');
 const translate = require('./ml_services/routes');
-const profile = require('./profile/routes');
 const loadModel = require('./ml_services/loadModel');
 const InputError = require('./execptions/InputError');
 
@@ -23,8 +22,7 @@ const init = async () => {
     server.route(dictionary);
     server.route(information);
     server.route(quiz);
-    server.route(profile);
-    server.route(logout);
+    server.route(settings);
     server.route(translate);
 
     server.ext('onPreResponse', function(request, h) {
