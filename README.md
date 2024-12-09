@@ -1,5 +1,45 @@
 # Cloud Computing - API
 
+## **Table of Contents**
+
+**User Account**  
+- [Register](https://github.com/Isyara-App/CloudComputing#register)  
+- [Login](https://github.com/Isyara-App/CloudComputing#login)  
+- [Logout](https://github.com/Isyara-App/CloudComputing#logout)  
+- [Edit Profile](https://github.com/Isyara-App/CloudComputing#edit-profile)  
+- [Delete Profile Picture](https://github.com/Isyara-App/CloudComputing#delete-profile-picture)
+
+**Contact Us**  
+- [Contact Us](https://github.com/Isyara-App/CloudComputing#contact-us)
+
+**Dictionary**  
+- [Letters](https://github.com/Isyara-App/CloudComputing#letters)  
+- [Search Letter](https://github.com/Isyara-App/CloudComputing#search-letter)  
+- [Words](https://github.com/Isyara-App/CloudComputing#words)  
+- [Search Word](https://github.com/Isyara-App/CloudComputing#search-word)
+
+**Information**  
+- [Community](https://github.com/Isyara-App/CloudComputing#community)  
+- [Community by Id](https://github.com/Isyara-App/CloudComputing#community-by-id)  
+- [Event](https://github.com/Isyara-App/CloudComputing#event)  
+- [Event by Id](https://github.com/Isyara-App/CloudComputing#event-by-id)  
+- [News](https://github.com/Isyara-App/CloudComputing#news)  
+- [News by Id](https://github.com/Isyara-App/CloudComputing#news-by-id)
+
+**Quiz**  
+- [Get All Levels](https://github.com/Isyara-App/CloudComputing#get-all-levels)  
+- [Get Level by Id](https://github.com/Isyara-App/CloudComputing#get-level-by-id)  
+- [Get Question by Id from a Level](https://github.com/Isyara-App/CloudComputing#get-question-by-id-from-a-level)  
+- [Check Answer](https://github.com/Isyara-App/CloudComputing#check-answer)  
+- [Check Completion](https://github.com/Isyara-App/CloudComputing#check-completion)
+
+**Status Codes**  
+- [Status Codes](https://github.com/Isyara-App/CloudComputing#status-codes)
+
+**Cloud Computing Members**  
+- [Members](https://github.com/Isyara-App/CloudComputing#members)
+---
+
 ## User account
 ### Register 
 - URL
@@ -36,7 +76,7 @@
         "name": "ayumi",
         "email": "ayumi@gmail.com",
         "password": "$2b$10$WAJQ9nZtWfpNsRp4ZtioQeiy3z1fq0L1zY9Uq9Dgiv11ewkbFITJW",
-        "image_url": "",
+        "image_url": "https://example.com/loremipsum/lorem_ipsum.png"
         "created_at": "2024-11-30T07:07:32.000Z",
         "updated_at": "2024-11-30T07:07:32.000Z"
     },
@@ -96,6 +136,127 @@
 }
 ```
 
+### Edit Profile 
+- URL
+  - `/profile/{id}`
+
+- Method
+  - PUT
+
+- Headers
+  - `Authorization` : `Bearer <token>`
+
+- Request Body
+
+| Key | Type | Description |
+| --- | ---- | ----------- |
+| image | file | Profile picture file to upload (e.g., .jpg, .png) |
+| name | text | New name for the user |
+
+- Request Body (Example)
+
+`/profile/1`
+
+| Key | Type | Value | Description |
+| --- | ---- | ----- | ----------- |
+| image | file | profile picture.png | Profile picture file to upload (e.g., .jpg, .png) |
+| name | text | potato | New name for the user |
+
+- Response (Example)
+```json
+{
+    "status": "success",
+    "message": "Profile updated successfully",
+    "data": {
+        "name": "potato",
+        "image_url": "https://storage.googleapis.com/example/example/1733746259540-8dplp"
+    }
+}
+```
+
+- Request Body (Example 2)
+
+`/profile/1`
+
+| Key | Type | Value | Description |
+| --- | ---- | ----- | ----------- |
+| image | file | profile picture.png | Profile picture file to upload (e.g., .jpg, .png) |
+
+- Response (Example 2)
+```json
+{
+    "status": "success",
+    "message": "Profile updated successfully",
+    "data": {
+        "name": null,
+        "image_url": "https://storage.googleapis.com/example/example/1733746259540-8dplp"
+    }
+}
+```
+Note:
+The data result "null" indicates that there has been no change.
+
+### Delete Profile Picture
+- URL
+  - `/profile/{id}/picture`
+
+- Method
+  - DELETE
+
+- Headers
+  - `Authorization` : `Bearer <token>`
+
+- Response (Example)
+`/profile/1/picture`
+```json
+{
+    "status": "success",
+    "message": "Profile picture has been reset to default"
+}
+```
+
+## Contact us 
+- URL
+  - `/contact`
+
+- Method
+  - POST
+
+- Headers
+  - `Authorization` : `Bearer <token>`
+
+- Request Body
+```javascript
+{
+    "name": string,
+    "email": string,
+    "message": string
+}
+```
+
+- Request Body (Example)
+```json
+{
+    "name": "ayumi",
+    "email": "ayumi@gmail.com",
+    "message": "aplikasi yang dibuat sangat membantu, terima kasih ya"
+}
+```
+
+- Response (Example)
+```json
+{
+    "status": "success",
+    "message": "Your message has been sent successfully",
+    "data": {
+        "id": 1,
+        "name": "ayumi",
+        "email": "ayumi@gmail.com",
+        "message": "aplikasi yang dibuat sangat membantu, terima kasih ya"
+    }
+}
+```
+
 ## Dictionary
 ### Letters
 - URL
@@ -142,7 +303,9 @@
   - `Authorization` : `Bearer <token>`
 
 - Response (Example)
+
 `/dictionary/letters?search=a`
+
 ```json
 {
     "status": "success",
@@ -204,7 +367,9 @@
   - `Authorization` : `Bearer <token>`
 
 - Response (Example)
+
 `/dictionary/words?search=halo`
+
 ```json
 {
     "status": "success",
@@ -269,7 +434,9 @@
   - `Authorization` : `Bearer <token>`
 
 - Response (Example)
+
 `/community/1`
+
 ```json
 {
     "status": "success",
@@ -334,7 +501,9 @@
   - `Authorization` : `Bearer <token>`
 
 - Response (Example)
-`/events/{1}`
+
+`/events/1`
+
 ```json
 {
     "status": "success",
@@ -399,7 +568,9 @@
   - `Authorization` : `Bearer <token>`
 
 - Response (Example)
+
 `/news/1`
+
 ```json
 {
     "status": "success",
@@ -439,6 +610,7 @@
             "name": "Level 1",
             "title": "The Basic I",
             "description": "Mari uji Kemampuan berbahasa isyarat anda!",
+            "image_url": "https://example.com/image_quiz.png",
             "created_at": "2024-12-05T07:50:29.000Z",
             "updated_at": "2024-12-05T07:50:44.000Z"
         },
@@ -447,6 +619,7 @@
             "name": "Level 2",
             "title": "The Basic II",
             "description": "Mari uji Kemampuan berbahasa isyarat anda!",
+            "image_url": "https://example.com/image_quiz.png",
             "created_at": "2024-12-05T08:39:05.000Z",
             "updated_at": "2024-12-05T08:39:05.000Z"
         }
@@ -474,6 +647,7 @@
         "name": "Level 1 ",
         "title": "The Basic I",
         "description": "Mari uji Kemampuan berbahasa isyarat anda!",
+        "image_url": "https://example.com/image_quiz.png",
         "created_at": "2024-12-05T07:50:29.000Z",
         "updated_at": "2024-12-05T07:50:44.000Z"
     }
@@ -493,7 +667,9 @@ User must complete the previous level to access the next level. For example, to 
   - `Authorization` : `Bearer <token>`
 
 - Response (Example)
+
 `/quiz/levels/1/questions/1`
+
 ```json
 {
     "status": "success",
@@ -507,13 +683,14 @@ User must complete the previous level to access the next level. For example, to 
             "B",
             "C"
         ],
-        "image_url": "https://storage.googleapis.com/isyara-storage/KamusHuruf/Huruf_B.png",
+        "image_url": "https://example.com/Huruf_B.png",
         "name": "Question 1 of 2"
     }
 }
 ```
 
 `/quiz/levels/2/questions/1`
+
 ```json
 {
     "status": "success",
@@ -527,7 +704,7 @@ User must complete the previous level to access the next level. For example, to 
             "B",
             "H"
         ],
-        "image_url": "https://storage.googleapis.com/isyara-storage/KamusHuruf/Huruf_H.png",
+        "image_url": "https://example.com/Huruf_H.png",
         "name": "Question 1 of 1"
     }
 }
@@ -580,7 +757,9 @@ The IDs for questions start from 1 again based on the level ID for ease of use.
   - `Authorization` : `Bearer <token>`
 
 - Response (Example)
+
 `/quiz/levels/1/completion`
+
 ```json
 {
     "status": "success",
