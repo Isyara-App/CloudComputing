@@ -62,6 +62,7 @@ const loginUser = async (request, h) => {
         status: 'success',
         message: 'Login successfully',
         data: {
+            id: userData.id,
             name: userData.name,
             email: userData.email,
         },
