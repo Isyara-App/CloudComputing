@@ -12,7 +12,7 @@ const updateProfile = async (request, h) => {
 
         if (deleteImage) {
             const resetResult = await pictureUpload.deleteProfilePicture(id);
-            imageUrl = resetResult.message.includes('default') ? 'https://example.com/default.png' : null;
+            imageUrl = resetResult.message.includes('default') ? 'https://storage.googleapis.com/isyara-storage/ProfilePicture/ProfilePicture_Default.png' : null;
         } else if (image) {
             console.log('Uploading new image to GCS...');
             imageUrl = await pictureUpload.uploadToGCS(request, h); // Ensure uploadToGCS works correctly
