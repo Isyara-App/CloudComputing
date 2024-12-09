@@ -1,4 +1,4 @@
-/* const postPredictHandler = require('../ml_services/handler');
+const postPredictHandler = require('../ml_services/handler');
 const validateToken = require('../middleware/middleware');
 
 const routes = [
@@ -16,4 +16,4 @@ const routes = [
     }
 ];
 
-module.exports = routes; */
+module.exports = routes;

@@ -1,4 +1,4 @@
-/* const tf = require('@tensorflow/tfjs-node');
+const tf = require('@tensorflow/tfjs-node');
 const InputError = require('../execptions/InputError');
 
 async function predictClassification(model, image) {
@@ -31,4 +31,4 @@ async function predictClassification(model, image) {
     }
 }
 
-module.exports = predictClassification; */
+module.exports = predictClassification;
