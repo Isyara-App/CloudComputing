@@ -2,23 +2,23 @@
 
 ## **Table of Contents**
 
-### **User Account**  
+**User Account**  
 - [Register](https://github.com/Isyara-App/CloudComputing#register)  
 - [Login](https://github.com/Isyara-App/CloudComputing#login)  
 - [Logout](https://github.com/Isyara-App/CloudComputing#logout)  
 - [Edit Profile](https://github.com/Isyara-App/CloudComputing#edit-profile)  
 - [Delete Profile Picture](https://github.com/Isyara-App/CloudComputing#delete-profile-picture)
 
-### **Contact Us**  
+**Contact Us**  
 - [Contact Us](https://github.com/Isyara-App/CloudComputing#contact-us)
 
-### **Dictionary**  
+**Dictionary**  
 - [Letters](https://github.com/Isyara-App/CloudComputing#letters)  
 - [Search Letter](https://github.com/Isyara-App/CloudComputing#search-letter)  
 - [Words](https://github.com/Isyara-App/CloudComputing#words)  
 - [Search Word](https://github.com/Isyara-App/CloudComputing#search-word)
 
-### **Information**  
+**Information**  
 - [Community](https://github.com/Isyara-App/CloudComputing#community)  
 - [Community by Id](https://github.com/Isyara-App/CloudComputing#community-by-id)  
 - [Event](https://github.com/Isyara-App/CloudComputing#event)  
@@ -26,17 +26,17 @@
 - [News](https://github.com/Isyara-App/CloudComputing#news)  
 - [News by Id](https://github.com/Isyara-App/CloudComputing#news-by-id)
 
-### **Quiz**  
+**Quiz**  
 - [Get All Levels](https://github.com/Isyara-App/CloudComputing#get-all-levels)  
 - [Get Level by Id](https://github.com/Isyara-App/CloudComputing#get-level-by-id)  
 - [Get Question by Id from a Level](https://github.com/Isyara-App/CloudComputing#get-question-by-id-from-a-level)  
 - [Check Answer](https://github.com/Isyara-App/CloudComputing#check-answer)  
 - [Check Completion](https://github.com/Isyara-App/CloudComputing#check-completion)
 
-### **Status Codes**  
+**Status Codes**  
 - [Status Codes](https://github.com/Isyara-App/CloudComputing#status-codes)
 
-### **Cloud Computing Members**  
+**Cloud Computing Members**  
 - [Members](https://github.com/Isyara-App/CloudComputing#members)
 ---
 
