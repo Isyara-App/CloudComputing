@@ -65,6 +65,7 @@ const loginUser = async (request, h) => {
             id: userData.id,
             name: userData.name,
             email: userData.email,
+            profilePicture: userData.image_url,
         },
         token
     });
