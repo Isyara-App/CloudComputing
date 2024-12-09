@@ -36,7 +36,7 @@
         "name": "ayumi",
         "email": "ayumi@gmail.com",
         "password": "$2b$10$WAJQ9nZtWfpNsRp4ZtioQeiy3z1fq0L1zY9Uq9Dgiv11ewkbFITJW",
-        "image_url": "",
+        "image_url": "https://example.com/loremipsum/lorem_ipsum.png"
         "created_at": "2024-11-30T07:07:32.000Z",
         "updated_at": "2024-11-30T07:07:32.000Z"
     },
@@ -439,6 +439,7 @@
             "name": "Level 1",
             "title": "The Basic I",
             "description": "Mari uji Kemampuan berbahasa isyarat anda!",
+            "image_url": "https://example.com/image_quiz.png",
             "created_at": "2024-12-05T07:50:29.000Z",
             "updated_at": "2024-12-05T07:50:44.000Z"
         },
@@ -447,6 +448,7 @@
             "name": "Level 2",
             "title": "The Basic II",
             "description": "Mari uji Kemampuan berbahasa isyarat anda!",
+            "image_url": "https://example.com/image_quiz.png",
             "created_at": "2024-12-05T08:39:05.000Z",
             "updated_at": "2024-12-05T08:39:05.000Z"
         }
@@ -474,6 +476,7 @@
         "name": "Level 1 ",
         "title": "The Basic I",
         "description": "Mari uji Kemampuan berbahasa isyarat anda!",
+        "image_url": "https://example.com/image_quiz.png",
         "created_at": "2024-12-05T07:50:29.000Z",
         "updated_at": "2024-12-05T07:50:44.000Z"
     }
@@ -507,7 +510,7 @@ User must complete the previous level to access the next level. For example, to 
             "B",
             "C"
         ],
-        "image_url": "https://storage.googleapis.com/isyara-storage/KamusHuruf/Huruf_B.png",
+        "image_url": "https://example.com/Huruf_B.png",
         "name": "Question 1 of 2"
     }
 }
@@ -527,7 +530,7 @@ User must complete the previous level to access the next level. For example, to 
             "B",
             "H"
         ],
-        "image_url": "https://storage.googleapis.com/isyara-storage/KamusHuruf/Huruf_H.png",
+        "image_url": "https://example.com/Huruf_H.png",
         "name": "Question 1 of 1"
     }
 }
