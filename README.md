@@ -12,6 +12,9 @@
 **Contact Us**  
 - [Contact Us](https://github.com/Isyara-App/CloudComputing#contact-us)
 
+**Translate**  
+- [Translate](https://github.com/Isyara-App/CloudComputing#translate)
+
 **Dictionary**  
 - [Letters](https://github.com/Isyara-App/CloudComputing#letters)  
 - [Search Letter](https://github.com/Isyara-App/CloudComputing#search-letter)  
@@ -76,7 +79,7 @@
         "name": "ayumi",
         "email": "ayumi@gmail.com",
         "password": "$2b$10$WAJQ9nZtWfpNsRp4ZtioQeiy3z1fq0L1zY9Uq9Dgiv11ewkbFITJW",
-        "image_url": "https://example.com/loremipsum/lorem_ipsum.png"
+        "image_url": "https://example.com/loremipsum/lorem_ipsum.png",
         "created_at": "2024-11-30T07:07:32.000Z",
         "updated_at": "2024-11-30T07:07:32.000Z"
     },
@@ -112,8 +115,10 @@
     "status": "success",
     "message": "Login successfully",
     "data": {
+        "id": 2,
         "name": "ayumi",
-        "email": "ayumi@gmail.com"
+        "email": "ayumi@gmail.com",
+        "profilePicture": "https://example.com/loremipsum/lorem_ipsum.png"
     },
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzI5NTA0NTIsImV4cCI6MTczMjk1NDA1Mn0.xBimJIvh0ADgASqmqGtbHKALhW8L-smEUB2GeUFdnyk"
 }
@@ -189,7 +194,7 @@
     "message": "Profile updated successfully",
     "data": {
         "name": null,
-        "image_url": "https://storage.googleapis.com/example/example/1733746259540-8dplp"
+        "image_url": "https://example.com/example/1733746259540-8dplp"
     }
 }
 ```
@@ -253,6 +258,42 @@ The data result "null" indicates that there has been no change.
         "name": "ayumi",
         "email": "ayumi@gmail.com",
         "message": "aplikasi yang dibuat sangat membantu, terima kasih ya"
+    }
+}
+```
+
+## Translate
+- URL
+  - `/translate`
+
+- Method
+  - POST
+
+- Headers
+  - `Authorization` : `Bearer <token>`
+
+- Request Body
+
+| Key | Type | Description |
+| --- | ---- | ----------- |
+| image | file | Sign language picture file to upload (e.g., .jpg, .png) |
+
+- Request Body (Example)
+
+| Key | Type | Value | Description |
+| --- | ---- | ----- | ----------- |
+| image | file | image_of_n.png | Sign language picture file to upload (e.g., .jpg, .png) |
+
+- Response (Example)
+```json
+{
+    "status": "success",
+    "message": "Model is predicted successfully",
+    "data": {
+        "id": "461b1598-9f34-4573-b127-de1b2ad161d1",
+        "word": "N",
+        "confidenceScore": 97.52449989318848,
+        "createdAt": "2024-12-11T04:36:58.856Z"
     }
 }
 ```
@@ -589,7 +630,7 @@ The data result "null" indicates that there has been no change.
 ```
 
 ## Quiz
-### Get All Level
+### Get All Levels
 - URL
   - `/quiz/levels`
 
@@ -772,7 +813,7 @@ Once the user completes the level, their progress status changes to completed, a
 
 <br>
  
-## Status code
+## Status codes
 - **200**: OK
 - **201**: Created
 - **400**: Bad Request
